@@ -1,0 +1,45 @@
+{
+  "name": "vue-course",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "clonedeep": "^2.0.0",
+    "core-js": "^2.6.5",
+    "echarts": "^4.5.0",
+    "eslint-utils": "^1.4.2",
+    "iview": "^3.5.1",
+    "js-cookie": "^2.2.0",
+    "js-md5": "^0.7.3",
+    "lockr": "^0.8.5",
+    "lodash": "^4.17.15",
+    "lodash.defaultsdeep": "^4.6.1",
+    "lodash.merge": "^4.6.2",
+    "vue": "^2.6.10",
+    "vue-highlightable-input": "^1.0.9",
+    "vue-monoplasty-slide-verify": "^1.0.5",
+    "vue-router": "^3.0.3",
+    "vue-virtual-scroll-list": "^1.4.1",
+    "vuetify": "^1.5.16",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "mockjs": "^1.0.1-beta3",
+    "vue-template-compiler": "^2.5.21",
+    "vuex-persist": "^2.0.1"
+  }
+}

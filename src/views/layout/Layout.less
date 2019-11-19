@@ -1,0 +1,61 @@
+.layout-wrapper,
+.layout-outer {
+  height: 100%;
+
+  // min-width: 50%;
+
+  .header-wrapper {
+    background-color: #fff;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 0 40px;
+
+    .trigger-icon {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+
+      &.rotate {
+        transform: rotateZ(-90deg);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+
+  // .sider-outer {
+  //   height: 100%;
+  //   overflow: hidden;
+
+  //   .ivu-layout-sider-children {
+  //     margin-right: -20px;
+  //     overflow-y: scroll;
+  //     overflow-x: hidden;
+  //   }
+  // }
+
+  .content-con {
+    padding: 10px;
+
+    .content-tab {
+      margin: 0 10px;
+      font-family: "Arial",
+        "Microsoft YaHei",
+        "黑体",
+        "宋体",
+        sans-serif;
+      font-weight: 300;
+    }
+
+    .ivu-tabs-bar {
+      margin-bottom: 0px;
+
+    }
+
+    // .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active {
+    //   color: #fff
+    // }
+  }
+
+  .page-card {
+    min-height: ~"calc(100vh - 84px - 48px)";
+  }
+}
