@@ -1,0 +1,6 @@
+// 这个是编辑器的配置文件，在这里我们可以配置编辑器的使用习惯
+root = true
+[*]
+charset = utf-8
+indent_style = tabs
+indent_size = 2

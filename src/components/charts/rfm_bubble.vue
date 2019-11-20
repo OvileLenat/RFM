@@ -4,7 +4,7 @@
 
 <script>
 import echarts from "echarts";
-import { on, off } from "@/lib/tools";
+import { on, off, checkoutCR } from "@/lib/tools";
 export default {
   name: "RfmBubble",
 
@@ -36,15 +36,31 @@ export default {
         }
       };
       let schema = [
-        {name: 'R',index:0,text:'R'},
-        {name:'F',index:1,text:'F'},
-        {name:'M',index:2,text:'M'},
-        {name:'RFM',index:3,text:'RFM'}
-      ]
+        { name: "R", index: 0, text: "R" },
+        { name: "F", index: 1, text: "F" },
+        { name: "M", index: 2, text: "M" },
+        { name: "RFM", index: 3, text: "RFM" }
+      ];
+      let group = [
+        "重要价值客户",
+        "重要保持客户",
+        "重要发展客户",
+        "重要挽留客户",
+        "一般价值客户",
+        "一般保持客户",
+        "一般发展客户",
+        "一般挽留客户"
+      ];
       let option = {
-        
-        color:[
-          '#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a'
+        color: [
+          "#c23531",
+          "#2f4554",
+          "#61a0a8",
+          "#d48265",
+          "#91c7ae",
+          "#749f83",
+          "#ca8622",
+          "#bda29a"
         ],
         // title: {
         //   text: "RFM"
@@ -63,24 +79,28 @@ export default {
           ]
         },
         tooltip: {
-        padding: 10,
-        backgroundColor: '#222',
-        borderColor: '#777',
-        borderWidth: 1,
-        formatter: function (obj) {
+          padding: 10,
+          backgroundColor: "#222",
+          borderColor: "#777",
+          borderWidth: 1,
+          formatter: function(obj) {
             var value = obj.value;
-            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
-                + obj.seriesName + ' ' + value[0] + '日：'
-                + value[7]
-                + '</div>'
-                + schema[1].text + '：' + value[1] + '<br>'
-                + schema[2].text + '：' + value[2] + '<br>'
-                + schema[3].text + '：' + value[3] + '<br>'
-                + schema[4].text + '：' + value[4] + '<br>'
-                + schema[5].text + '：' + value[5] + '<br>'
-                + schema[6].text + '：' + value[6] + '<br>';
-        }
-    },
+            return (
+              '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+              obj.seriesName+
+              "</div>" +
+               "R：" +
+              value[0] +
+              "<br>" +
+              "F："+
+              value[1] +
+              "<br>" +
+             "M：" +
+              value[2] +
+              "<br>" 
+            );
+          }
+        },
         xAxis: {
           splitLine: {
             lineStyle: {
@@ -97,7 +117,7 @@ export default {
           scale: true
         },
         series: [
-          {
+           {
             name: "重要价值客户",
             data: this.value[0],
             type: "scatter",
@@ -113,7 +133,7 @@ export default {
                 position: "top"
               }
             },
-             itemStyle: itemStyle
+            itemStyle: itemStyle
           },
           {
             name: "重要保持客户",
@@ -246,6 +266,8 @@ export default {
       this.dom = echarts.init(this.$refs.dom, "tdTheme");
       this.dom.setOption(option);
       on(window, "resize", this.resize);
+      console.log(checkoutCR(1/3,2,5))
+      
     });
   },
   beforeDestroy() {

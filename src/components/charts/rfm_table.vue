@@ -27,7 +27,7 @@ export default {
           title: "Name",
           key: "name",
           sortable: true,
-          minWidth: 50,
+          minWidth: 70,
           tooltip: true
         },
         {
@@ -35,7 +35,7 @@ export default {
           key: "group",
           sortable: true,
           tooltip: true,
-          minWidth: 50
+          minWidth:80
         },
         {
           title: "R",

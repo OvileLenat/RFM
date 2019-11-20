@@ -3,7 +3,7 @@
     <Row :gutter="14">
       <i-col span="3">
         <Card>
-          <p slot="title">分类方式</p>
+          <p slot="title">RFM 权重</p>
           <p>{{ classification }}</p>
         </Card>
       </i-col>

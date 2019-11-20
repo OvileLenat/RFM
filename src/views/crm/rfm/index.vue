@@ -187,8 +187,17 @@
 </template>
 
 <script>
+import { checkoutCR } from "@/lib/tools"
 export default {
-
+    data(){
+      return{
+      
+       
+      }
+    },
+    created(){
+      console.log(checkoutCR(1/3,2,5))
+    }
 }
 </script>
 
