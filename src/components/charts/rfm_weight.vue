@@ -1,69 +1,66 @@
 <template>
-  <div>
+  <div >
     <Icon type="ios-add-circle-outline" @click="dialogTableVisible = true" />
-    <!-- 添加用户弹框 -->
+    <!-- 添加弹框 -->
     <Modal
-      title="添加用户"
-       @on-ok="ok"
+      title="添加 RFM 权重"
+      v-model="dialogTableVisible"
       :visible.sync="dialogTableVisible"
       :close-on-click-modal="false"
-      draggable 
-      width=50
+      :mask-closable="true"
+      :mask="true"
+      width="20"
+      :styles="{minWidth:'240px'}"
+      okText="添加"
     >
-    
-      <!-- 添加用户的表单 -->
-      <Form ref="addFormRef" :rules="rulesAddWeight" :model="addWeight" label-width="100">
-        
+      <Form ref="addFormRef" :rules="rulesAddWeight" :model="addWeight" minWidth="240">
         <Row>
           <Col span="8">
-        <FormItem  prop="rf" label="R - F：">
-          <Input v-model="addWeight.rf" />
-        </FormItem>
-        </Col>
-        <Col span="8">
-        <FormItem prop="rm" label="R - M：">
-          <Input v-model="addWeight.rm" />
-        </FormItem>
-        </Col>
-        <Col span="8">
-        <FormItem prop="fm" label="F - M：">
-          <Input v-model="addWeight.fm" />
-        </FormItem>
-        </Col>
+            <FormItem prop="rf" label="R - F：">
+              <Input v-model="addWeight.rf" @on-change="checkOutCR" />
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem prop="rm" label="R - M：">
+              <Input v-model="addWeight.rm" @on-change="checkOutCR" />
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem prop="fm" label="F - M：">
+              <Input v-model="addWeight.fm" @on-change="checkOutCR" />
+            </FormItem>
+          </Col>
         </Row>
-       
         <FormItem prop="cr" label="CR：">
-          <Input v-model="addUser.cr" />
+          <Input v-model="addWeight.cr" readonly />
         </FormItem>
-        <FormItem>
-          <el-button @click="dialogTableVisible = false">取消</el-button>
-          <el-button type="primary" @click="onAddUser">确定</el-button>
-        </FormItem>
-      </el-form>
+      </Form>
     </Modal>
   </div>
 </template>
 <script>
+import { checkoutCR } from "@/lib/tools";
 
 export default {
-   data() {
+  data() {
     const checkRFM = (rule, value, callback) => {
-      if(value <= 0){
-        callback(new Error('请输入的值 > 0'));
+      if (value <= 0) {
+        callback(new Error("请输入的值 > 0"));
       } else {
         callback();
       }
     };
     const checkCR = (rule, value, callback) => {
-      if(value < 0.1){
-        callback(new Error('一致性比率CR > 0.1'));
+      console.log("CR is " + typeof value);
+      console.log("CR = " + value);
+      if (value > 0.1 || isNaN(value)) {
+        callback(new Error("一致性比率CR > 0.1"));
       } else {
         callback();
       }
     };
     return {
-      dialogTableVisible: false, // 添加用户弹框
-      // 添加用户
+      dialogTableVisible: false,
       addWeight: {
         rf: 0,
         rm: 0,
@@ -71,20 +68,25 @@ export default {
         cr: 0
       },
       rulesAddWeight: {
-        rf: [
-          { validator: checkRFM, trigger: 'blur' }
-        ],
-        rm: [
-          { validator: checkRFM, trigger: 'blur' }
-        ],
-        fm: [
-          { validator: checkRFM, trigger: 'blur' }
-        ],
-        cr: [
-          { validator: checkCR, trigger: 'blur' }
-        ]
+        rf: [{ validator: checkRFM, trigger: "blur" }],
+        rm: [{ validator: checkRFM, trigger: "blur" }],
+        fm: [{ validator: checkRFM, trigger: "blur" }],
+        cr: [{ validator: checkCR, trigger: "blur" }]
       }
+    };
+  },
+  methods: {
+    checkOutCR() {
+      console.log("checkOutCR be checked");
+      let arr = checkoutCR(
+        parseFloat(this.addWeight.rf),
+        parseFloat(this.addWeight.rm),
+        parseFloat(this.addWeight.fm)
+      );
+      this.addWeight.cr = arr[0];
+      // 检验 CR 值
+      this.$refs.addFormRef.validateField("cr");
     }
   }
-}
+};
 </script>

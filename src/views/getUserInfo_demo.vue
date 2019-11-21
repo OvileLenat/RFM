@@ -4,6 +4,7 @@
     <Button type="primary" @click="dequeue" style="marginLeft: 20px">push到队列</Button>
     <Button type="primary" @click="printqueue" style="marginLeft: 20px">打印队列</Button>
     <Button type="primary" @click="authen" style="marginLeft: 20px">github授权</Button>
+    <rfm-weight></rfm-weight>
   </div>
 </template>
 
@@ -13,7 +14,13 @@ import { getUserInfo } from "@/api/user";
 import { authenByGithub } from "@/api/github";
 // import stack from "@/stack";
 import queue from "@/queue";
+
+import { RfmWeight } from "_c/charts";
 export default {
+  components: {
+    RfmWeight
+  },
+
   data() {
     return {};
   },

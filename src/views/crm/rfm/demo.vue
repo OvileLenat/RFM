@@ -4,7 +4,17 @@
       <i-col span="3">
         <Card>
           <p slot="title">RFM 权重</p>
-          <p>{{ classification }}</p>
+          
+          <p>
+            <Row>
+               <i-col span="20">
+            <DatePicker size="small" type="date" placeholder="Select date" :options="dueDate"></DatePicker>
+            </i-col>
+            <i-col span="4">
+            <rfm-weight></rfm-weight>
+            </i-col>
+            </Row>
+          </p>
         </Card>
       </i-col>
       <i-col span="5">
@@ -79,14 +89,15 @@
 </template>
 
 <script>
-import { RfmPie, RfmBubble, RfmBar, RfmTable } from "_c/charts";
+import { RfmPie, RfmBubble, RfmBar, RfmTable, RfmWeight } from "_c/charts";
 export default {
   name: "",
   components: {
     RfmPie,
     RfmBubble,
     RfmBar,
-    RfmTable
+    RfmTable,
+    RfmWeight
   },
   data() {
     return {

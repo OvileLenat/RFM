@@ -50,6 +50,7 @@ export const officialOfMaxandMin = (mold,num,max,min) => {
  * @param 
  */
 export const checkoutCR = (rf,rm,fm) => {
+  console.log(rf+"2"+rm+"3"+fm)
   let Customary = new Array();
   let columnNormalization = new Array();
   for(let i=0;i<3;i++){
@@ -103,7 +104,15 @@ export const checkoutCR = (rf,rm,fm) => {
   amdMax = amdMax/3;
   const CI = (amdMax-3)/2;
   const RI = 0.52;
-  return (CI/RI);
+  let returnArray = new Array();
+  const CR = CI/RI;
+  console.log(CR);
+  console.log(W);
+  returnArray[0]=CR;
+  returnArray[1]=W[0];
+  returnArray[2]=W[1];
+  returnArray[3]=W[2];
+  return returnArray;
 }
 
 
