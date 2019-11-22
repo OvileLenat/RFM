@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <Icon type="ios-add-circle-outline" @click="dialogTableVisible = true" />
     <!-- 添加弹框 -->
     <Modal
@@ -12,6 +12,7 @@
       width="20"
       :styles="{minWidth:'240px'}"
       okText="添加"
+      footer-hide="true"
     >
       <Form ref="addFormRef" :rules="rulesAddWeight" :model="addWeight" minWidth="240">
         <Row>
@@ -31,9 +32,16 @@
             </FormItem>
           </Col>
         </Row>
-        <FormItem prop="cr" label="CR：">
-          <Input v-model="addWeight.cr" readonly />
-        </FormItem>
+        <Row>
+          <FormItem prop="cr" label="CR：">
+            <Col span="15">
+              <Input v-model="addWeight.cr" readonly />
+            </Col>
+            <Col span="4">
+              <Button :size="small" type="button">添加</Button>
+            </Col>
+          </FormItem>
+        </Row>
       </Form>
     </Modal>
   </div>
