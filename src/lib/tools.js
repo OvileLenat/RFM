@@ -106,15 +106,12 @@ export const checkoutCR = (rf,rm,fm) => {
   const RI = 0.52;
   let returnArray = new Array();
   const CR = CI/RI;
-  console.log(CR);
-  console.log(W);
   returnArray[0]=CR;
   returnArray[1]=W[0];
   returnArray[2]=W[1];
   returnArray[3]=W[2];
   return returnArray;
 }
-
 
 export const objEqual = (obj1, obj2) => {
   const keysArr1 = Object.keys(obj1)
@@ -143,6 +140,17 @@ export const on = (function () {
   }
 })()
 
+/**
+ * 对象数组的深拷贝
+ * @param source 数组或对象
+ */
+export const objDeepCopy = (source) => {
+  let sourceCopy = source instanceof Array ? [] : {};
+  for (let item in source) {
+      sourceCopy[item] = typeof source[item] === 'object' ? objDeepCopy(source[item]) : source[item];
+  }
+  return sourceCopy;
+}
 /**
  * @description 解绑事件 off(element, event, handler)
  */
