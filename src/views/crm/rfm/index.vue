@@ -1,206 +1,69 @@
 <template>
-   <div>
-    <Row :gutter="14">
-      <i-col span="3">
-        <Card>
-          <p slot="title">
-            <Icon type="waterdrop"></Icon>
-            分类方式
-          </p>
-          <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-              <count-to :end="2534"/>
-            </div>
-          </Row>
-        </Card>
-      </i-col>
-        <i-col span="3" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="code"></Icon>
-              DATE
-            </p>
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-              <div class="count-to-con">
-                <count-to :end="2534">
-                  <span slot="left">Total:&nbsp;</span>
-                  <span slot="right">&nbsp;times</span>
-                </count-to>
-              </div>
-            </Row>
-          </Card>
-        </i-col>
-        <i-col span="3" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="paintbucket"></Icon>
-              自定义样式
-            </p>
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-              <div class="count-to-con">
-                <count-to :end="2534" count-class="count-text" unit-class="unit-class">
-                  <span class="slot-text" slot="left">Total:&nbsp;</span>
-                  <span class="slot-text" slot="right">&nbsp;times</span>
-                </count-to>
-              </div>
-            </Row>
-          </Card>
-        </i-col>
-        <i-col span="3" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="settings"></Icon>
-              设置数据格式
-            </p>
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-              <div class="count-to-con">
-                <count-to :end="2534" count-class="count-text" unit-class="unit-class" :decimals="2">
-                  <span class="slot-text" slot="left">Total:&nbsp;</span>
-                  <span class="slot-text" slot="right">&nbsp;times</span>
-                </count-to>
-              </div>
-            </Row>
-          </Card>
-        </i-col>
-        <i-col span="3" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="paintbucket"></Icon>
-              自定义样式
-            </p>
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-              <div class="count-to-con">
-                <count-to :end="2534" count-class="count-text" unit-class="unit-class">
-                  <span class="slot-text" slot="left">Total:&nbsp;</span>
-                  <span class="slot-text" slot="right">&nbsp;times</span>
-                </count-to>
-              </div>
-            </Row>
-          </Card>
-        </i-col>
-         <i-col span="3" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="paintbucket"></Icon>
-              自定义样式
-            </p>
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-              <div class="count-to-con">
-                <count-to :end="2534" count-class="count-text" unit-class="unit-class">
-                  <span class="slot-text" slot="left">Total:&nbsp;</span>
-                  <span class="slot-text" slot="right">&nbsp;times</span>
-                </count-to>
-              </div>
-            </Row>
-          </Card>
-        </i-col>
-        <i-col span="4" class="padding-left-10">
-          <Card>
-            <p slot="title">
-              <Icon type="paintbucket"></Icon>
-              asas
-            </p>
-           
-            <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-               
-                 <Button type="primary">Primary</Button>
-            </div>
-            </Row>
-          </Card>
-        </i-col>
-    </Row>
-    <Row :gutter="14" style="margin-top: 14px;">
-      <i-col span="8">
-        <Card>
-          <p slot="title">
-            <Icon type="ios-color-wand"></Icon>
-            转换单位简化数据
-          </p>
-          <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-              <count-to :simplify="true" :end="2534" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">Total:&nbsp;</span>
-                <span class="slot-text" slot="right">&nbsp;times</span>
-              </count-to>
-            </div>
-          </Row>
-        </Card>
-      </i-col>
-      <i-col span="8" class="padding-left-10">
-        <Card>
-          <p slot="title">
-            <Icon type="ios-shuffle-strong"></Icon>
-            自定义单位
-          </p>
-          <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-              <count-to :simplify="true" :unit="unit" :end="253" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">原始数据：253&nbsp;=>&nbsp;</span>
-              </count-to>
-              <count-to :simplify="true" :unit="unit" :end="2534" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">原始数据：2534&nbsp;=>&nbsp;</span>
-              </count-to>
-              <count-to :simplify="true" :unit="unit" :end="257678" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">原始数据：257678&nbsp;=>&nbsp;</span>
-              </count-to>
-            </div>
-          </Row>
-        </Card>
-      </i-col>
-      <i-col span="8" class="padding-left-10">
-        <Card>
-          <p slot="title">
-            <Icon type="android-stopwatch"></Icon>
-            可异步更新数据
-          </p>
-          <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-              <count-to :end="asynEndVal" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">Total:&nbsp;</span>
-                <span class="slot-text" slot="right">&nbsp;times</span>
-              </count-to>
-            </div>
-          </Row>
-        </Card>
-      </i-col>
-    </Row>
-    <Row :gutter="14" style="margin-top: 14px;">
-      <i-col>
-        <Card>
-          <p slot="title">
-            <Icon type="ios-analytics"></Icon>
-            综合实例
-          </p>
-          <Row type="flex" justify="center" align="middle" class="countto-page-row">
-            <div class="count-to-con">
-              <count-to :delay="500" :simplify="true" :unit="unit2" :end="integratedEndVal" count-class="count-text" unit-class="unit-class">
-                <span class="slot-text" slot="left">原始数据:&nbsp;{{ integratedEndVal }}&nbsp;=>&nbsp;</span>
-                <span class="slot-text" slot="right">&nbsp;times</span>
-              </count-to>
-            </div>
-          </Row>
-        </Card>
-      </i-col>
-    </Row>
-  </div>
+  <FullCalendar
+  defaultView="dayGridMonth"
+  height="parent"
+  @dateClick="handleDateClick"
+  :plugins="calendarPlugins"
+  locale="esLocale"
+  :header="{
+  left:'prevYear,prev,next,nextYear today',
+  center:'title',
+  right:'dayGridMonth,dayGridWeek,dayGridDay'
+  }"
+  :buttonText="buttonText"
+  :events="events"
+  />
 </template>
 
 <script>
-import { checkoutCR } from "@/lib/tools"
+import FullCalendar from "@fullcalendar/vue";
+import dayGridPlugin from "@fullcalendar/daygrid";
+
 export default {
-    data(){
-      return{
-      
-       
-      }
-    },
-    created(){
-      console.log(checkoutCR(1/3,2,5))
+  components: {
+    FullCalendar // make the <FullCalendar> tag available
+  },
+  data() {
+    let date = new Date();
+    let d = date.getDate();
+    let m = date.getMonth();
+    let y = date.getFullYear();
+    return {
+      buttonText: {
+        today: "今天",
+        month: "月",
+        week: "周",
+        day: "天"
+      },
+      events: [
+        {
+          title: "全天计划\r\n#####\r\n写代码",
+          start: '2019-11-23T14:30:00'
+        },
+        {
+          title: "张家界四日游",
+          start: '2019-11-20',
+          end: '2019-11-24'
+        },
+        {
+          id: 999,
+          title: "电话回访客户",
+          start: '2019-11-22',
+          allDay: false
+        }
+      ],
+      calendarPlugins: [dayGridPlugin]
+    };
+  },
+  methods: {
+    handleDateClick(arg) {
+      alert(arg.date);
     }
-}
+  }
+};
 </script>
 
-<style>
-
+<style lang='scss'>
+@import "~@fullcalendar/core/main.css";
+@import "~@fullcalendar/daygrid/main.css";
 </style>

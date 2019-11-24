@@ -4,15 +4,14 @@
       <i-col span="3">
         <Card>
           <p slot="title">RFM 权重</p>
-          
           <p>
             <Row>
-               <i-col span="20">
-            <DatePicker size="small" type="date" placeholder="Select date" :options="dueDate"></DatePicker>
-            </i-col>
-            <i-col span="4">
-            <rfm-weight></rfm-weight>
-            </i-col>
+              <i-col span="20">
+                <DatePicker size="small" type="date" placeholder="Select date" :options="dueDate" style="margin-right:8px"></DatePicker>
+              </i-col>
+              <i-col span="4">
+                <rfm-weight></rfm-weight>
+              </i-col>
             </Row>
           </p>
         </Card>
@@ -76,13 +75,13 @@
       </i-col>
       <i-col :md="24" :lg="12" style="margin-bottom: 20px;">
         <Card shadow>
-          <rfm-bubble style="height: 500px;" :value="RfmBubble" text="Bubble"/>
+          <rfm-bubble style="height: 500px;" :value="RfmBubble" text="Bubble" />
         </Card>
       </i-col>
-       <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
-         <Card shadow>
-       <rfm-table style="height: 500px;" :value="RfmBubble" text="Table"/>
-       </Card>
+      <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
+        <Card shadow>
+          <rfm-table style="height: 500px;" :value="RfmBubble" text="Table" />
+        </Card>
       </i-col>
     </Row>
   </div>
@@ -154,7 +153,7 @@ export default {
           [44053, 81.1, 80688545, "Germany", "一般价值客户"]
         ],
         [
-           [64304, 81.6, 5210967, "Norway", "一般保持客户"],
+          [64304, 81.6, 5210967, "Norway", "一般保持客户"],
           [24787, 77.3, 38611794, "Poland", "一般保持客户"],
           [23038, 73.13, 143456918, "Russia", "一般保持客户"],
           [19360, 76.5, 78665830, "Turkey", "一般保持客户"]
@@ -166,23 +165,22 @@ export default {
           [34186, 80.6, 4528526, "New Zealand", "一般发展客户"]
         ],
         [
-           [42182, 82.8, 329425, "Iceland", "一般挽留客户"],
+          [42182, 82.8, 329425, "Iceland", "一般挽留客户"],
           [5903, 66.8, 1311050527, "India", "一般挽留客户"],
           [38225, 81.4, 64715810, "United Kingdom", "一般挽留客户"],
           [53354, 79.1, 321773631, "United States", "一般挽留客户"]
         ]
       ],
-RfmBar:[
-  {name:"重要价值客户",value:6},
-   {name:"重要保持客户",value:6},
-   {name:"重要发展客户",value:7},
-   {name:"重要挽留客户",value:5},
-   {name:"一般价值客户",value:2},
-   {name:"一般保持客户",value:4},
-   {name:"一般发展客户",value:4},
-   {name:"一般挽留客户",value:4},
-  
-],
+      RfmBar: [
+        { name: "重要价值客户", value: 6 },
+        { name: "重要保持客户", value: 6 },
+        { name: "重要发展客户", value: 7 },
+        { name: "重要挽留客户", value: 5 },
+        { name: "一般价值客户", value: 2 },
+        { name: "一般保持客户", value: 4 },
+        { name: "一般发展客户", value: 4 },
+        { name: "一般挽留客户", value: 4 }
+      ],
       FList: [
         {
           value: "Sales Volume",

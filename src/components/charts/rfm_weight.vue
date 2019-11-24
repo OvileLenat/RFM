@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Icon type="ios-add-circle-outline" @click="dialogTableVisible = true" />
+    <Icon type="md-settings" @click="dialogTableVisible = true" />
     <!-- 添加弹框 -->
     <Modal
       title="RFM 权重管理"

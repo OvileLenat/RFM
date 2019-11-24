@@ -1,6 +1,5 @@
 <template>
   <Table
-    border
     :row-class-name="rowClassName"
     height="500"
     minWidth="100"
