@@ -70,7 +70,7 @@ export const routerMap = [
       {
         path: 'rfm/management',
         name: 'rfm_management',
-        component: () => import('@/views/crm/rfm'),
+        component: () => import('@/views/crm/rfm/fullcalendar'),
         meta: { index: 2, title: 'RFM 管理', icon: 'ios-person' }
       }
     ]
