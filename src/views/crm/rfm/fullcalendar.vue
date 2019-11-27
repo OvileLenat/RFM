@@ -20,6 +20,7 @@
       :slotEventOverlap="true"
       :events="Events"
       :eventLimit="true"
+      eventLimitText = "更多"
       :dayPopoverFormat="{ 
       month: '2-digit',
       day: '2-digit',
@@ -51,6 +52,15 @@
       @dateClick="handleDateClick"
       @select="handleSelect"
       @eventMouseEnter="handlemouseEnter"
+      resources= "[
+    {
+      id:'a',
+      title:'Resource A',
+      businessHours:{
+        startTime: '10:00',
+        endTime: '18:00'
+      }
+    }]"
     />
     <Modal
       v-model="modal1"
@@ -82,6 +92,7 @@ export default {
   },
   data() {
     return {
+      modal1:false,
       Events: [
         {
           title: "开发团队小组会议",
@@ -96,11 +107,17 @@ export default {
           color: "orange"
         },
         {
-          start: "2019-11-26 07:10:00",
-          end: "2019-11-26 14:00:00",
           title: "北理珠信管学术会议",
+          start: '2019-11-26 15:00:00',
+          end: '2019-11-26 22:00:00',
           color: "green"
-        }
+        },
+        {
+        title:"My repeating event",
+        daysOfWeek:[1,0],
+        startTime:"13:00",
+        endTime:"14:00"
+    }
       ],
       
       calendarPlugins: [
