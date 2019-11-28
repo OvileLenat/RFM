@@ -20,7 +20,7 @@
       :slotEventOverlap="true"
       :events="Events"
       :eventLimit="true"
-      eventLimitText = "更多"
+      eventLimitText="更多"
       :dayPopoverFormat="{ 
       month: '2-digit',
       day: '2-digit',
@@ -51,8 +51,8 @@
       locale="zh-cn"
       @dateClick="handleDateClick"
       @select="handleSelect"
-      @eventMouseEnter="handlemouseEnter"
-      resources= "[
+      @eventClick="handleEventClick"
+      resources="[
     {
       id:'a',
       title:'Resource A',
@@ -92,34 +92,39 @@ export default {
   },
   data() {
     return {
-      modal1:false,
+      modal1: false,
       Events: [
         {
           title: "开发团队小组会议",
           start: "2019-11-25 10:00:00",
           end: "2019-11-25 16:00:00",
-          color: "orange"
+          color: "orange",
+          description: ""
         },
         {
           title: "商学院小组会议",
+          description: "dwqdqw",
+
           start: "2019-11-26 11:00:00",
           end: "2019-11-26 20:00:00",
           color: "orange"
         },
         {
           title: "北理珠信管学术会议",
-          start: '2019-11-26 15:00:00',
-          end: '2019-11-26 22:00:00',
-          color: "green"
+          start: "2019-11-26 15:00:00",
+          end: "2019-11-26 22:00:00",
+          color: "green",
+          description: ""
         },
         {
-        title:"My repeating event",
-        daysOfWeek:[1,0],
-        startTime:"13:00",
-        endTime:"14:00"
-    }
+          title: "My repeating event",
+          daysOfWeek: [1, 0],
+          startTime: "13:00",
+          endTime: "14:00",
+          description: ""
+        }
       ],
-      
+
       calendarPlugins: [
         dayGridPlugin,
         timeGridPlulgin,
@@ -153,8 +158,22 @@ export default {
     handleSelect(info) {
       console.log("form" + info.startStr + " to " + info.endStr);
     },
-    handlemouseEnter: info => {
-      console.log(info);
+
+    handleEventClick(info) {
+      console.log(info)
+      this.$Message.info({
+                content:( `标题：${info.event.title} 
+              <br>详细：${info.event.extendedProps.description}
+              <br>开始时间：${info.event.start.toISOString()}
+              <br>结束时间：${info.event.end.toISOString()}`
+              ),
+                duration: 10
+            });
+      this.$Notice.open({
+        title: info.event.title,
+        desc: info.event.extendedProps.description
+      });
+      console.log(this);
     },
     addEvent() {},
     cancelAddEvent() {}

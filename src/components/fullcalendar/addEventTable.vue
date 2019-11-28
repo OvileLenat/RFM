@@ -9,60 +9,53 @@
     @on-ok="addEvent"
     @on-cancel="cancelAddEvent"
   >
-    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-      <FormItem label="事务标题" prop="name">
-        <Input v-model="formValidate.name" placeholder="请输入事务的标题" />
+    <Form ref="newEvent" :model="newEvent" :rules="ruleValidate" :label-width="80">
+      <FormItem label="事务标题">
+        <Input v-model="newEvent.title" placeholder="请输入事务的标题" />
       </FormItem>
-      <FormItem label="事务内容" prop="mail">
+      <FormItem label="事务内容">
         <Input
-          v-model="formValidate.desc"
+          v-model="newEvent.extendedProps.description"
           type="textarea"
           :autosize="{minRows: 2,maxRows: 5}"
           placeholder="请输入详细的事务内容"
         />
       </FormItem>
-      <FormItem label="事务类型" prop="city">
-        <Select v-model="transactionType" placeholder="请选择事务的类型">
-          <Option v-for="item in transactionTypes" :value="item.value" :key="item.value">
-            <span>{{ item.label }}</span>
-            <span style="float:right">
-              <Icon type="ios-water" :color="item.value" />
+      <FormItem label="事务类型">
+        <Select v-model="newEvent.color" placeholder="请选择事务的类型" style="width: 200px">
+          <Option
+            v-for="(item,index) in transactionTypes"
+            :label="item.label"
+            :value="item.value"
+            :key="index"
+          >
+            <span style="margin-right:10px">
+              <Icon type="md-radio-button-off" :color="item.value" />
             </span>
+            <span>{{ item.label }}</span>
           </Option>
         </Select>
       </FormItem>
-      <FormItem label="开始时间" v-show="!timeState.isRecurring">
+      <FormItem label="时间" v-show="!timeState.isRecurring">
         <DatePicker
-          type="date"
-          v-model="startTime"
-          placeholder="请输入时间"
-          style="width: 200px"
-          v-show="timeState.isAllday"
-        ></DatePicker>
-        <DatePicker
-          type="datetime"
-          v-model="startTime"
-          format="yyyy-MM-dd HH:mm"
+          type="datetimerange"
           v-show="!timeState.isAllday"
-          placeholder="请输入具体时间"
-          style="width: 200px"
-        ></DatePicker>
-      </FormItem>
-      <FormItem label="结束时间" v-show="!timeState.isRecurring">
-        <DatePicker
-          type="date"
-          v-model="endTime"
-          placeholder="请输入时间"
-          style="width: 200px"
-          v-show="timeState.isAllday"
-        ></DatePicker>
-        <DatePicker
-          type="datetime"
-          v-model="endTime"
+          :value="[newEvent.start,newEvent.end]"
           format="yyyy-MM-dd HH:mm"
-          v-show="!timeState.isAllday"
-          placeholder="请输入具体时间"
+          placement="top-end"
+          placeholder="请选择具体时间"
+          style="width: 300px"
+          @on-change="changTime"
+        ></DatePicker>
+        <DatePicker
+          type="daterange"
+          v-show="timeState.isAllday"
+          :value="[newEvent.start,newEvent.end]"
+          format="yyyy-MM-dd"
+          placement="top-end"
+          placeholder="请选择时间"
           style="width: 200px"
+          @on-change="changTime"
         ></DatePicker>
       </FormItem>
       <FormItem>
@@ -82,7 +75,12 @@
         </Select>
       </FormItem>
       <FormItem label="重复时间：" v-show="timeState.isRecurring">
-        <Select multiple style="width:210px" v-show="recurringState.isWeekDay">
+        <Select
+          multiple
+          :value="newEvent.daysOfWeek"
+          style="width:210px"
+          v-show="recurringState.isWeekDay"
+        >
           <Option v-for="item in weekLists" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         <TimePicker
@@ -92,6 +90,7 @@
           placement="bottom-end"
           placeholder="Select time"
           style="width: 168px"
+          @on-change="changRecurringTime"
         ></TimePicker>
       </FormItem>
 
@@ -106,10 +105,11 @@
 export default {
   data() {
     return {
+      times: [],
       startTime: "",
       endTime: "",
-      timeType:"默认",
-      timeState:{
+      timeType: "默认",
+      timeState: {
         // 默认 全天 周期性
         isAllday: false,
         isRecurring: false
@@ -121,7 +121,6 @@ export default {
       },
       recurringType: 1,
       transactionType: "",
-      
       // 比较重要：后台消息提醒；特别重要：邮件和后台消息提醒。
       transactionTypes: [
         { value: "#2db7f5", label: "不重要" },
@@ -144,57 +143,20 @@ export default {
         { value: 0, label: "周日" }
       ],
       modal1: true,
-      formValidate: {
-        name: "",
-        mail: "",
-        city: "",
-        gender: "",
-        interest: [],
-        date: "",
-        time: "",
-        desc: ""
+      newEvent: {
+        title: "",
+        extendedProps:{
+          description: ""
+        },
+        start: "",
+        end: "",
+        allDay: false,
+        color: "",
+        daysOfWeek: [],
+        startTime: "",
+        endTime: ""
       },
       ruleValidate: {
-        name: [
-          {
-            required: true,
-            message: "The name cannot be empty",
-            trigger: "blur"
-          }
-        ],
-        mail: [
-          {
-            required: true,
-            message: "Mailbox cannot be empty",
-            trigger: "blur"
-          },
-          { type: "email", message: "Incorrect email format", trigger: "blur" }
-        ],
-        city: [
-          {
-            required: true,
-            message: "Please select the city",
-            trigger: "change"
-          }
-        ],
-        gender: [
-          { required: true, message: "Please select gender", trigger: "change" }
-        ],
-        interest: [
-          {
-            required: true,
-            type: "array",
-            min: 1,
-            message: "Choose at least one hobby",
-            trigger: "change"
-          },
-          {
-            type: "array",
-            max: 2,
-            message: "Choose two hobbies at best",
-            trigger: "change"
-          }
-        ],
         date: [
           {
             required: true,
@@ -231,19 +193,35 @@ export default {
     this.changedRecurringType();
   },
   methods: {
+    changRecurringTime(time) {
+      this.newEvent.startTime = time[0];
+      this.newEvent.endTime = time[1];
+      console.log(this.newEvent);
+    },
+    changTime(time) {
+      this.newEvent.start = time[0];
+      this.newEvent.end = time[1];
+      console.log(this.newEvent);
+    },
     changeMoreChoices(name) {
-          this.$Message.success(name);
+      this.$Message.success(name);
+      console.log(this.newEvent);
       if (name === "默认") {
         this.timeState.isAllday = false;
         this.timeState.isRecurring = false;
+        this.newEvent.allDay = false;
+        this.newEvent.start += " 00:00";
+        this.newEvent.end += " 00:00";
       }
       if (name === "全天") {
         this.timeState.isAllday = true;
         this.timeState.isRecurring = false;
+        this.newEvent.allDay = true;
       }
       if (name === "周期性") {
         this.timeState.isAllday = false;
         this.timeState.isRecurring = true;
+        this.newEvent.allDay = false;
       }
     },
     handleSubmit(name) {
@@ -263,7 +241,7 @@ export default {
       this.recurringState.isWeekDay = false;
       this.recurringState.isEveryDay = false;
     },
-    
+
     addEvent() {},
     changedRecurringType() {
       this.$Message.success(this.recurringType);
