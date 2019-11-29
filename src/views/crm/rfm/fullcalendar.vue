@@ -85,10 +85,12 @@ import "@fullcalendar/core/locales/zh-cn"; // 支持中文
 import momentPlugin from "@fullcalendar/moment";
 import interactionPlugin from "@fullcalendar/interaction"; // 加载交互插件，使得可以点击拖动选择
 import listPlugin from "@fullcalendar/list";
+import expandRow from "./model-expand.vue";
 
 export default {
   components: {
-    FullCalendar
+    FullCalendar,
+    expandRow
   },
   data() {
     return {
@@ -160,20 +162,15 @@ export default {
     },
 
     handleEventClick(info) {
-      console.log(info)
-      this.$Message.info({
-                content:( `标题：${info.event.title} 
-              <br>详细：${info.event.extendedProps.description}
-              <br>开始时间：${info.event.start.toISOString()}
-              <br>结束时间：${info.event.end.toISOString()}`
-              ),
-                duration: 10
-            });
-      this.$Notice.open({
-        title: info.event.title,
-        desc: info.event.extendedProps.description
+      this.$Modal.confirm({
+        render: h => {
+          return h(expandRow, {
+            props: {
+              eventObject: info.event
+            }
+          });
+        }
       });
-      console.log(this);
     },
     addEvent() {},
     cancelAddEvent() {}
