@@ -1,18 +1,13 @@
 <template>
   <div>
+    <event-from></event-from>
     <FullCalendar
       :plugins="calendarPlugins"
       height="parent"
       :allDaySlot="true"
       allDayText="全天"
-      :customButtons="{
-      newWork:{
-        text:'新增',
-        click:function(){
-          modal1 = true
-        }}}"
       :header="{
-      left: 'prev,next today newWork',
+      left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
       }"
@@ -51,8 +46,10 @@
       locale="zh-cn"
       @dateClick="handleDateClick"
       @select="handleSelect"
-      @eventClick="handleEventClick"
-      resources="[
+      @eventMouseEnter="handleEventClick"
+    />
+  </div>
+     <!-- resources="[
     {
       id:'a',
       title:'Resource A',
@@ -60,21 +57,7 @@
         startTime: '10:00',
         endTime: '18:00'
       }
-    }]"
-    />
-    <Modal
-      v-model="modal1"
-      title="Common Modal dialog box title"
-      :mask-closable="false"
-      :draggable="true"
-      @on-ok="addEvent"
-      @on-cancel="cancelAddEvent"
-    >
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-    </Modal>
-  </div>
+    }]" -->
 </template>
  
 <script>
@@ -86,15 +69,18 @@ import momentPlugin from "@fullcalendar/moment";
 import interactionPlugin from "@fullcalendar/interaction"; // 加载交互插件，使得可以点击拖动选择
 import listPlugin from "@fullcalendar/list";
 import expandRow from "./model-expand.vue";
+import EventFrom from "_c/fullcalendar/addEventTable.vue";
+import { RfmWeight } from "_c/charts";
 
 export default {
   components: {
     FullCalendar,
-    expandRow
+    RfmWeight,
+    expandRow,
+    EventFrom
   },
   data() {
     return {
-      modal1: false,
       Events: [
         {
           title: "开发团队小组会议",
@@ -162,7 +148,9 @@ export default {
     },
 
     handleEventClick(info) {
-      this.$Modal.confirm({
+      console.log(info);
+      this.$Message.info({
+        duration: 3,
         render: h => {
           return h(expandRow, {
             props: {
@@ -184,5 +172,8 @@ export default {
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";
 @import "~@fullcalendar/list/main.css";
+.ivu-modal-confirm-footer {
+  display: none;
+}
 </style>
  

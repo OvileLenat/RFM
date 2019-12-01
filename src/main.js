@@ -8,6 +8,8 @@ import axios from "axios";
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import SlideVerify from 'vue-monoplasty-slide-verify';
+import moment from 'moment'
+Vue.prototype.$moment = moment
 
 Vue.use(iView)
 Vue.config.productionTip = false
