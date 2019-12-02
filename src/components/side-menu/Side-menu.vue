@@ -44,7 +44,7 @@
             <Icon :type="item.meta.icon" color="#fff" :size="20"></Icon>
           </span>
         </Tooltip>
-      </template>
+      </template>z
     </div>
   </div>
 </template>

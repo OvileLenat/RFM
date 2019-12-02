@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <Icon type="md-settings" @click="dialogTableVisible = true" /> -->
-    <Button  @click="dialogTableVisible = true"></Button>
+    <Icon type="md-settings" @click="dialogTableVisible = true" />
+    
     <!-- 添加弹框 -->
     <Modal
       title="RFM 权重管理"

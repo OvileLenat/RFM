@@ -3,7 +3,7 @@
     <span @click="modal = true">
       <Icon type="md-add-circle" />新增
     </span>
-    <span>|</span>
+     <Divider type="vertical" />
     <Modal
       v-model="modal"
       title="添加事务"
